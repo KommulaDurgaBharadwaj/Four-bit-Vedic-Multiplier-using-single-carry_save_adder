@@ -1,0 +1,21 @@
+module vedic_four(
+    input  [3:0] a,
+    input  [3:0] b,
+    output [7:0] prod
+);
+
+    wire [3:0] p1,p2,p3,p4;
+    wire [3:0] g;
+    wire [1:0] csa_cout;  
+    wire [2:0] upper;
+    vedic_two w1(a[1:0], b[1:0], p1);
+    vedic_two w2(a[1:0], b[3:2], p2);
+    vedic_two w3(a[3:2], b[1:0], p3);
+    vedic_two w4(a[3:2], b[3:2], p4);
+    carry_sav_adder w5(.a(p2),.b(p3),.c({p4[1:0], p1[3:2]}),.out(g),.cout(csa_cout));
+    assign upper = {1'b0, p4[3:2]} + csa_cout;
+    assign prod[1:0] = p1[1:0];
+    assign prod[5:2] = g;
+    assign prod[7:6] = upper[1:0];
+
+endmodule
