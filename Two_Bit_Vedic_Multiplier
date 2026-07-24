@@ -1,0 +1,9 @@
+module vedic_two(input [1:0]a,input [1:0]b,output [3:0] prod);
+    wire x1,x2,x3,x4;
+    and w1(prod[0],a[0],b[0]);
+    and w2(x1,a[0],b[1]);
+    and w3(x2,a[1],b[0]);
+    Ha w4(x1,x2,prod[1],x3);
+    and w5(x4,a[1],b[1]);
+    Ha r2(x3,x4,prod[2],prod[3]);
+endmodule
